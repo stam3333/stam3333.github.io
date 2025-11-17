@@ -63,5 +63,5 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(() => {
         currentPageIndex = (currentPageIndex + 1) % pageOrder.length;
         showSection(pageOrder[currentPageIndex]);
-    }, 4000);
+    }, 5000);
 });
