@@ -18,8 +18,39 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const target = link.dataset.target;
+            const sub = link.dataset.sub;
             showSection(target);
+            if (sub) {
+                // open the corresponding contact panel when submenu provided
+                document.querySelectorAll('.contact-panel').forEach(p => p.classList.remove('active'));
+                const panel = document.getElementById(target + '-' + sub);
+                if (panel) panel.classList.add('active');
+            }
         });
+    });
+
+    // handle nav submenu links (if any separate elements)
+    const navSubLinks = document.querySelectorAll('.nav-sub-link');
+    navSubLinks.forEach(slink => {
+        slink.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = slink.dataset.target;
+            const sub = slink.dataset.sub;
+            showSection(target);
+            if (sub) {
+                document.querySelectorAll('.contact-panel').forEach(p => p.classList.remove('active'));
+                const panel = document.getElementById(target + '-' + sub);
+                if (panel) panel.classList.add('active');
+            }
+        });
+    });
+
+    // Close submenu when clicking outside
+    document.addEventListener('click', (e) => {
+        const inside = e.target.closest('.has-sub');
+        if (!inside) {
+            hasSubs.forEach(li => li.classList.remove('open'));
+        }
     });
 
     // Contact tab handling
@@ -32,25 +63,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Original interactive message logic (moved from old script)
-    const messageBtn = document.getElementById('messageBtn');
-    const message = document.getElementById('message');
-    if (messageBtn && message) {
-        const messages = [
-            'Welcome to my website!',
-            'You clicked the button!',
-            'This is interactive!',
-            'Hosted on GitHub Pages!',
-            'Static websites rock!'
-        ];
-        let clickCount = 0;
-        messageBtn.addEventListener('click', function() {
-            clickCount++;
-            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            message.textContent = randomMessage + ' (Clicks: ' + clickCount + ')';
-        });
-    }
-    
     // Start on Home
     showSection('home');
+    
+    // Auto-cycle through pages every 4 seconds
+    const pageOrder = ['home', 'tree', 'photo', 'contact'];
+    let currentPageIndex = 0;
+    setInterval(() => {
+        currentPageIndex = (currentPageIndex + 1) % pageOrder.length;
+        showSection(pageOrder[currentPageIndex]);
+    }, 4000);
 });
