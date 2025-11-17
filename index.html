@@ -9,9 +9,73 @@
 <body>
     <div class="container">
         <h1 id="greeting">Hello World!</h1>
-        <p class="subtitle">Welcome to my changed website</p>
+        <p class="subtitle">Welcome to my website</p>
         <button id="messageBtn" class="btn">Click Me</button>
         <p id="message" class="message"></p>
+    </div>
+    <header class="site-header">
+        <div class="brand">Beglyarov Family</div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#" class="nav-link" data-target="home">Home</a></li>
+                <li><a href="#" class="nav-link" data-target="tree">Tree</a></li>
+                <li><a href="#" class="nav-link" data-target="photo">Photo</a></li>
+                <li class="has-sub">
+                    <a href="#" class="nav-link" data-target="contact">Contact</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="site-main">
+        <section id="home" class="page-section active">
+            <div class="hero">
+                <h1>Welcome to the Beglyarov Family</h1>
+                <p class="lead">Stories, photos and family tree.</p>
+            </div>
+        </section>
+
+        <section id="tree" class="page-section">
+            <div class="container">
+                <h2>Family Tree</h2>
+                <p>Our family tree will appear here. (Placeholder)</p>
+            </div>
+        </section>
+
+        <section id="photo" class="page-section">
+            <div class="container">
+                <h2>Photos</h2>
+                <p>Photo gallery coming soon. Place family photos in the `images/` folder.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="page-section">
+            <div class="container">
+                <h2>Contact</h2>
+                <div class="contact-tabs">
+                    <button class="contact-tab" data-tab="test">Test</button>
+                </div>
+
+                <div id="contact-test" class="contact-panel active">
+                    <!-- Original main content moved here -->
+                    <div class="content-card">
+                        <h1 id="greeting">Hello World!</h1>
+                        <p class="subtitle">Welcome to my website</p>
+                        <button id="messageBtn" class="btn">Click Me</button>
+                        <p id="message" class="message"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; Beglyarov Family</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
     </div>
     <script src="js/script.js"></script>
 </body>
