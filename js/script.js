@@ -14,12 +14,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 pageContainer.innerHTML = content;
                 currentPage = pageName;
                 updateNavigation(pageName);
+                console.log(`Loaded page: ${pageName}`);
             } else {
-                pageContainer.innerHTML = '<p>Page not found.</p>';
+                console.error(`Failed to load ${pageName}.html: ${response.status}`);
+                pageContainer.innerHTML = `<p>Error: Could not load ${pageName} page (${response.status})</p>`;
             }
         } catch (error) {
             console.error('Error loading page:', error);
-            pageContainer.innerHTML = '<p>Error loading page.</p>';
+            pageContainer.innerHTML = `<p>Error loading page: ${error.message}</p>`;
         }
     }
 
@@ -35,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const target = link.dataset.target;
+            console.log(`Nav click: ${target}`);
             loadPage(target);
         });
     });
@@ -43,11 +46,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (brandLink) {
         brandLink.addEventListener('click', (e) => {
             e.preventDefault();
+            console.log('Brand click: home');
             loadPage('home');
         });
     }
 
     // Load home page on init
+    console.log('Script loaded, loading home page...');
     loadPage('home');
     
     // Auto-cycle through pages every 5 seconds
@@ -55,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentPageIndex = 0;
     setInterval(() => {
         currentPageIndex = (currentPageIndex + 1) % pageOrder.length;
+        console.log(`Auto-cycling to: ${pageOrder[currentPageIndex]}`);
         loadPage(pageOrder[currentPageIndex]);
     }, 5000);
 });
