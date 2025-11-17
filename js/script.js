@@ -29,6 +29,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Handle brand/logo click to navigate home
+    const brandLink = document.querySelector('.brand-link');
+    if (brandLink) {
+        brandLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSection('home');
+        });
+    }
+
     // handle nav submenu links (if any separate elements)
     const navSubLinks = document.querySelectorAll('.nav-sub-link');
     navSubLinks.forEach(slink => {
@@ -45,29 +54,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Close submenu when clicking outside
-    document.addEventListener('click', (e) => {
-        const inside = e.target.closest('.has-sub');
-        if (!inside) {
-            hasSubs.forEach(li => li.classList.remove('open'));
-        }
-    });
-
-    // Contact tab handling
-    const contactTabs = document.querySelectorAll('.contact-tab');
-    contactTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            contactTabs.forEach(t => t.classList.toggle('active', t === tab));
-            const tabName = tab.dataset.tab;
-            document.querySelectorAll('.contact-panel').forEach(p => p.classList.toggle('active', p.id === ('contact-' + tabName)));
-        });
-    });
-
     // Start on Home
     showSection('home');
     
     // Auto-cycle through pages every 4 seconds
-    const pageOrder = ['home', 'tree', 'photo', 'contact'];
+    const pageOrder = ['home', 'tree', 'photo'];
     let currentPageIndex = 0;
     setInterval(() => {
         currentPageIndex = (currentPageIndex + 1) % pageOrder.length;
